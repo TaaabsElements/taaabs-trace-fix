@@ -1,0 +1,63 @@
+<link rel="import" href="../taaabs-stylesheet-behavior/taaabs-stylesheet-behavior.html">
+
+<dom-module id="taaabs-trace-fix">
+  <link rel="import" type="css" href="../samotracesjs/dist/samotraces.css"/>
+
+  <template>
+    <h4 style="margin-left: 50%;"> Display Trace Icon </h4>
+    <div>Trace URL:<a href="{{trace.id}}">{{trace.id}}</a><div>
+    <div>Trace Origin:<span>{{origin}}</span></div>
+    <div>Trace Type:<span>{{type}}</span></div>
+    <div>Trace Model:<a href="{{model}}">{{model}}</a></div>
+    <content></content>
+  </template>
+
+  <script>
+    /* global Polymer, Samotraces, TaaabsBehaviors */
+
+    Polymer({
+      is: 'taaabs-trace-fix',
+      behaviors: [
+        TaaabsBehaviors.Stylesheet
+      ],
+      properties: {
+        trace: {
+          type: Object,
+          notify: true,
+          reflectToAttribute: true,
+          observer: '_traceselChanged'
+        },
+        time: {
+          type: Object,
+          notify: true,
+          reflectToAttribute: true,
+          observer:'_timeChanged'
+        },
+        options: {
+          type: String,
+          notify: true
+        },
+        origin: String,
+        type: String,
+        model: String
+      },
+      _traceUpdateData: function(newValue) {
+        this.set('origin', this.trace.origin);
+        this.set('type', this.trace.type);
+        this.set('model', this.trace.get_model()); // jshint ignore:line
+        this.time = new Samotraces.TimeWindow({start: new Date(newValue.origin).getTime(), end: Date.now()});
+      },
+      _traceselChanged: function(newValue) {
+        newValue.on('trace:updateData', this._traceUpdateData.bind(this, newValue));
+      },
+      _timeChanged : function () {
+        var that = this;
+        if (!this.options){
+          this._getStylesheet().then(function(stylesheet) {
+            that.options = stylesheet;
+           });
+        }
+      }
+    });
+  </script>
+</dom-module>

@@ -1,0 +1,29 @@
+{
+  "name": "taaabs-trace-fix",
+  "version": "1.0.0",
+  "description": "`<taaabs-trace-fix>`.",
+  "keywords": [
+    "web-components",
+    "polymer",
+    "taaabs"
+  ],
+  "authors": [
+    "TaaabsTeam"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TaaabsElements/taaabs-trace-fix.git"
+  },
+  "main": "taaabs-trace-fix.html",
+  "license": "https://github.com/TaaabsElements/taaabs-trace-fix/LICENSE",
+  "dependencies": {
+    "polymer": "polymer/polymer#^1.0.0",
+    "samotracesjs": "https://github.com/liris-tweak/samotraces.js.git",
+    "taaabs-stylesheet-behavior": "https://github.com/TaaabsElements/taaabs-stylesheet-behavior.git"
+  },
+  "devDependencies": {
+    "iron-component-page": "polymerelements/iron-component-page#^1.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+  },
+  "ignore": []
+}
